@@ -5,7 +5,8 @@ Created on 31/07/2023 12:38
 """
 
 import pandas as pd
-from .utils import get_soup,  _validate_name, get_fbref_url, make_scouting_url, get_slug_id
+from .utils import get_soup, _validate_name, get_fbref_url, make_scouting_url, get_slug_id, get_player_info, \
+    get_minutes_played, get_image, save_img
 
 
 def cache_stats(url, _attr_name):
@@ -24,21 +25,36 @@ def cache_stats(url, _attr_name):
 
 class Player:
     def __init__(self, player_name):
-        self._name = _validate_name(name=player_name)
-        self._url_page = get_fbref_url(name=self._name)
+        self.name = _validate_name(name=player_name)
+        self._url_page = get_fbref_url(name=self.name)
         self._standard_tables = None
         self._scouting_url = make_scouting_url(player_page_url=self._url_page)
         self._scouting_tables = None
-        self.slug_id = get_slug_id(self._scouting_url)
+        self.slug_id = get_slug_id(scouting_url=self._scouting_url)
+        self.infos = get_player_info(url_page=self._url_page)
+        self.img = self.infos['img']
+        self.country_img = self.infos['country_img']
+        self.position = self.infos['position']
+        self.height = self.infos['height']
+        self.weight = self.infos['weight']
+        self.age = self.infos['age']
+        self.club = self.infos['club']
+        self.country = self.infos['country']
+        self.footed = self.infos['footed']
+        self.complete_name = self.infos['complete_name']
+        minutes_played_value = get_minutes_played(scouting_url=self._scouting_url)
+        self.minutes_played = minutes_played_value if minutes_played_value is not None else None
+        save_img(get_image(img_url=self.img), 'player_img')
+        save_img(get_image(img_url=self.country_img), 'country_img')
 
-    @property
-    def name(self):
-        return self._name
+
+
 
     def __repr__(self):
         return "<player: {}, slug_id: {}, id: {}>".format(self.name, self.slug_id, id(self))
 
-    def get_tables(self, url):
+    @staticmethod
+    def get_tables(url):
         soup = get_soup(url)
         all_tables = soup.findAll("tbody")
         all_headers = soup.findAll("div", {"class": "section_heading"})
@@ -131,3 +147,4 @@ class Player:
     @cache_stats(url='_url_page', _attr_name='_standard_tables')
     def get_player_club_summary(self):
         return self._standard_tables['Player Club Summary']
+
