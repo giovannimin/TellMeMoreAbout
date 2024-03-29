@@ -3,6 +3,7 @@
 Created on 03/08/2023 19:15
 @author: GiovanniMINGHELLI
 """
+import os
 
 from src.player import Player
 import matplotlib.pyplot as plt
@@ -11,6 +12,10 @@ from src.lib_string import convert_var_name_to_french
 import matplotlib.colors as mcolors
 from PIL import Image
 import numpy as np
+
+from src.utils import get_root
+
+root = get_root()
 
 
 class Pizza:
@@ -96,8 +101,10 @@ class Pizza:
             ha="right"
         )
 
-        fig.figimage(self._resize_img(image=Image.open('player_img.png')), xo=20, yo=20, zorder=-10, alpha=1)
-        fig.figimage(self._resize_img(image=Image.open('country_img.png'), desired_width=40), xo=130, yo=20, zorder=-10,
+        player_img = os.path.join(root, 'assets', 'player_attr', 'player_img.png')
+        country_img = os.path.join(root, 'assets', 'player_attr', 'country_img.png')
+        fig.figimage(self._resize_img(image=Image.open(player_img)), xo=20, yo=20, zorder=-10, alpha=1)
+        fig.figimage(self._resize_img(image=Image.open(country_img), desired_width=40), xo=130, yo=20, zorder=-10,
                      alpha=1)
 
         if save_fig:

@@ -4,6 +4,7 @@ Created on 31/07/2023 12:38
 @author: GiovanniMINGHELLI
 """
 import json
+import os
 import warnings
 from datetime import date
 
@@ -12,13 +13,26 @@ import numpy as np
 import requests
 import re
 from bs4 import BeautifulSoup
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from urllib.parse import urlparse
-from .lib_string import fbref_search_url
+from .lib_string import fbref_search_url, PROJECT_NAME
 import imageio.v2 as imageio
 from io import BytesIO
 import matplotlib.pyplot as plt
+
+
+def get_root(main_project_folder: str = PROJECT_NAME) -> str:
+    """
+     Retourne le chemin racine du projet principal.
+
+     :param main_project_folder: Nom du dossier principal du projet.
+     :return: Le chemin absolu du dossier principal du projet.
+     """
+    current_directory = os.getcwd()
+    while not os.path.exists(os.path.join(current_directory, main_project_folder)):
+        current_directory = os.path.dirname(current_directory)
+        if current_directory == '/':
+            raise FileNotFoundError(f"Repertoire '{main_project_folder}' non-trouve.")
+    return os.path.join(current_directory, main_project_folder)
 
 
 def get_soup(fbref_url=fbref_search_url, name=None):

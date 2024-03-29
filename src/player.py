@@ -5,8 +5,11 @@ Created on 31/07/2023 12:38
 """
 
 import pandas as pd
+import os
 from .utils import get_soup, _validate_name, get_fbref_url, make_scouting_url, get_slug_id, get_player_info, \
-    get_minutes_played, get_image, save_img
+    get_minutes_played, get_image, save_img, get_root
+
+root = get_root()
 
 
 def cache_stats(url, _attr_name):
@@ -46,8 +49,8 @@ class Player:
         self.complete_name = self.infos['complete_name']
         minutes_played_value = get_minutes_played(scouting_url=self._scouting_url)
         self.minutes_played = minutes_played_value if minutes_played_value is not None else None
-        save_img(get_image(img_url=self.img), 'player_img')
-        save_img(get_image(img_url=self.country_img), 'country_img')
+        save_img(get_image(img_url=self.img), output_path=os.path.join(root, 'assets', 'player_attr',  'player_img'))
+        save_img(get_image(img_url=self.country_img), output_path=os.path.join(root, 'assets', 'player_attr', 'country_img'))
 
     def __repr__(self):
         return "<player: {}, slug_id: {}, id: {}>".format(self.name, self.slug_id, id(self))

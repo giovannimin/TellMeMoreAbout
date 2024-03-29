@@ -3,6 +3,7 @@
 Created on 31/07/2023 18:37
 @author: GiovanniMINGHELLI
 """
+PROJECT_NAME = 'TellMeMoreAbout'
 
 fbref_search_url = "https://fbref.com/search/search.fcgi?search"
 
