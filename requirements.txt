@@ -14,3 +14,4 @@ utils~=1.0.1
 CairoSVG~=2.7.1
 numpy~=1.23.5
 Pillow~=9.0.0
+fastapi~=0.95.1
