@@ -19,7 +19,9 @@ def cache_stats(url, _attr_name):
                 return func(self, *args, **kwargs)
             else:
                 return func(self, *args, **kwargs)
+
         return wrapper
+
     return decorator
 
 
@@ -46,9 +48,6 @@ class Player:
         self.minutes_played = minutes_played_value if minutes_played_value is not None else None
         save_img(get_image(img_url=self.img), 'player_img')
         save_img(get_image(img_url=self.country_img), 'country_img')
-
-
-
 
     def __repr__(self):
         return "<player: {}, slug_id: {}, id: {}>".format(self.name, self.slug_id, id(self))
@@ -147,4 +146,3 @@ class Player:
     @cache_stats(url='_url_page', _attr_name='_standard_tables')
     def get_player_club_summary(self):
         return self._standard_tables['Player Club Summary']
-

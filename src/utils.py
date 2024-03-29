@@ -21,7 +21,7 @@ from io import BytesIO
 import matplotlib.pyplot as plt
 
 
-def get_soup(fbref_url, name=None):
+def get_soup(fbref_url=fbref_search_url, name=None):
     """
     :param fbref_url:
     :param name:
@@ -47,45 +47,34 @@ def _validate_name(name, url=fbref_search_url):
         raise TypeError("Player name must be a string")
     soup = get_soup(url, name)
     strong_str = [i.next_element for i in soup.findAll("strong")]
-    title = soup.find("title")
     if "0 hits" in strong_str:
         raise ValueError(f"`{name}` not found in FBRef")
-    if "Search Results" in title.next_element:
+    if "Search Results" in strong_str:
         # Grab first search result
-        name_soup = soup.findAll("div", {"class": "search-item-alt-names"})
-        search_names = [name_soup[i].contents[0] for i in range(len(name_soup))]
+        name_soup = soup.find_all("div", class_="search-item-name")
+        search_names = [div.find('a').text.strip() for div in name_soup]
+
+        # link_soup = soup.find_all("div", class_="search-item-url")
+        # search_url = [div.find('a').text.strip() for div in link_soup]
+
         msg = f"Exact match for {name} not found.  \n" \
               f"Setting `player_name` to first search result: {search_names[0]}  " \
-              f"Maybe `player_name` could be one of them {search_names}"
+              f"Maybe `player_name` could be one of them {search_names[1:]}"
         warnings.warn(msg)
         name = search_names[0]
+
         return _validate_name(name=name, url=url)
-    return name
+    return soup.find("div", id="meta").find('span').text
 
 
-def get_fbref_url(name, url=fbref_search_url):
+def get_fbref_url(name):
     """
 
-    :param url: (str): URL de la page de recherche FBREF
-    :param name: (str): Nom du joueur
-    :return: (str): real fbref url
+    :param name:
+    :return:
     """
-    # Configation des paramètres de chrome
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-gpu")
-    driver = webdriver.Chrome(options=chrome_options)
-
-    # Navigation sur l'URL
-    driver.get(url + "=" + name)
-    driver.implicitly_wait(2)
-
-    # Récupérer l'URL courante du navigateur une fois que vous êtes sur le site
-    current_url = driver.current_url
-
-    # Fermeture de la session
-    driver.quit()
-    return current_url
+    response = requests.get(fbref_search_url + "=" + name)
+    return response.url
 
 
 def make_scouting_url(player_page_url):
@@ -119,7 +108,7 @@ def calculate_age(birth_date_str):
 def get_player_info(url_page: str) -> dict:
     """
     Récupère les informations d'un joueur à partir de l'url_page FBREF spécifiée.
-    :param url_page: (str): L'URL de la page joueur.
+    :param url_page: (str) : L'URL de la page joueur.
     :return: dict: Un dictionnaire contenant les informations du joueur.
               Les clés du dictionnaire sont : 'country', 'position', 'footed', 'weight', 'height', 'img', 'age', 'club'.
               Les informations manquantes auront des valeurs None.

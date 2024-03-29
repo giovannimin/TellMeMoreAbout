@@ -26,7 +26,6 @@ convert_var_name_to_french = {'Non-Penalty Goals': 'Buts (sans les pénaltys)',
                               'Clearances': 'Dégagements',
                               'Aerials won': 'Duels aérien gagnés'}
 
-
 convert_positions = {}
 
 convert_country = {}

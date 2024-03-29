@@ -13,7 +13,6 @@ from PIL import Image
 import numpy as np
 
 
-
 class Pizza:
     def __init__(self, player: Player):
         self.title_size = None
@@ -38,13 +37,13 @@ class Pizza:
         return [color_mapping[value] for value in values]
 
     @staticmethod
-    def _resize_img(image, desired_width = 100):
+    def _resize_img(image, desired_width=100):
         aspect_ratio = image.width / image.height
         desired_height = int(desired_width / aspect_ratio)
         image_np_resized = np.array(image.resize((desired_width, desired_height)))
         return image_np_resized
 
-    def plot_pizza_figure(self):
+    def plot_pizza_figure(self, save_fig=False):
         data = self.process_data()
 
         baker = PyPizza(
@@ -60,10 +59,10 @@ class Pizza:
             values=values,
             figsize=(8, 8),
             param_location=110,
-            slice_colors= self._set_color_gradient(values),
-            kwargs_slices=dict( edgecolor="#000000",
-                                zorder=2, linewidth=1
-                                ),
+            slice_colors=self._set_color_gradient(values),
+            kwargs_slices=dict(edgecolor="#000000",
+                               zorder=2, linewidth=1
+                               ),
             kwargs_params=dict(
                 color="#000000", fontsize=7,
                 va="center", alpha=.9,
@@ -98,7 +97,9 @@ class Pizza:
         )
 
         fig.figimage(self._resize_img(image=Image.open('player_img.png')), xo=20, yo=20, zorder=-10, alpha=1)
-        fig.figimage(self._resize_img(image=Image.open('country_img.png'), desired_width=40), xo=130, yo=20, zorder=-10, alpha=1)
+        fig.figimage(self._resize_img(image=Image.open('country_img.png'), desired_width=40), xo=130, yo=20, zorder=-10,
+                     alpha=1)
 
-        # plt.savefig(filename, dpi=500, bbox_inches='tight')
+        if save_fig:
+            plt.savefig('outputs/fig.png', dpi=500, bbox_inches='tight')
         plt.show()
