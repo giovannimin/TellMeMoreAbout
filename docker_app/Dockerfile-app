@@ -1,0 +1,13 @@
+FROM python:3.9
+
+WORKDIR /TellMeMoreAbout
+
+COPY . .
+
+ARG REQUIREMENTS
+
+RUN pip install --no-cache-dir -r "$REQUIREMENTS"
+
+EXPOSE 8000
+
+CMD ["python3", "-m", "uvicorn", "src.api.app:app", "--reload", "--host", "0.0.0.0"]

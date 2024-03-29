@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile-app
+      args:
+        - REQUIREMENTS=/TellMeMoreAbout/requirements.txt
+    ports:
+      - "8000:8000"
+    networks:
+      - tell_me_more_about_network
+    volumes:
+      - ./:/app/
+
