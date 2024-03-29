@@ -110,3 +110,4 @@ class Pizza:
         if save_fig:
             plt.savefig('outputs/fig.png', dpi=500, bbox_inches='tight')
         plt.show()
+        return fig
