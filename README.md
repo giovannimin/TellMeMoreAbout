@@ -4,7 +4,10 @@
 
 
 Ce projet est un projet open source, qui a pour but de mettre en évidence des indicateurs de performance clés chez les joueurs de football.
-L'**objectif principal** à terme est de pouvoir établir des rapports comparatifs des différents joueurs référencés. L'**objectif secondaire** est de proposer par une approche de clustering un panel de joueurs à profil fortement similaires en prenant en compte des paramètres de recherche *(fourchette d'âge, valeur marchande, championnat, KPI etc.)*.  
+
+L'**objectif principal** à terme est de pouvoir établir des rapports comparatifs des différents joueurs référencés. 
+
+L'**objectif secondaire** est de proposer par une approche de clustering un panel de joueurs à profil fortement similaires en prenant en compte des paramètres de recherche *(fourchette d'âge, valeur marchande, championnat, KPI etc.)*.  
 
 L'objectif pour les contributeurs de ce projet est de mettre à profit leurs compétences autour d'un projet orienté football, en parfaisant leurs compétences techniques, le tout en collaborant avec d'autres passionnés de la communauté sport technologies. 
 
@@ -51,7 +54,7 @@ Le projet accueille avec plaisir votre expertise et votre enthousiasme !
 Les petites améliorations ou corrections sont toujours appréciées.
 N'hésitez pas à soumettre de nouvelles idées de fonctionnalités. 
 
-Pour contribuer au projet **[TellMeAboutIt](https://github.com/giovannimin/TellMeMoreAbout)**. Vous pouvez :
+Pour contribuer au projet **[TellMeMoreAbout](https://github.com/giovannimin/TellMeMoreAbout)**. Vous pouvez :
 - Examiner les demandes de **[Pull request](https://github.com/giovannimin/TellMeMoreAbout/pulls)**
 - Prendre en charge les **[Issues](https://github.com/giovannimin/TellMeMoreAbout/issues)**
 - Nous aider à maintenir les outils de ce projet 
