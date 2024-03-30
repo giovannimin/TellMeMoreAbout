@@ -32,8 +32,10 @@ Pour utiliser ce projet en local :
 
     git clone https://github.com/giovannimin/TellMeMoreAbout.git
 
+
 ### Pré-requis
 Pour installer les dépendances de ce projet
+
 
     pip install requirements.txt
 
@@ -45,15 +47,18 @@ Ce projet est destiné à être utilisé via différents modes :
 
     curl -o path/${player_name}_report.png -X GET http://localhost:8000/status/${player_name}
 
+
 - Une utilisation locale via la CLI 
     
 
     python3 ./src/main.py $player_name
 
+
 - Une application executable avec Docker 
 
 
     docker-compose -f TellMeMoreAbout/docker_app/docker-compose.yml up --build
+
 
 - Une utilisation automatisée contrôlée par des bots [X | Twitter](https://twitter.com)
 
@@ -66,10 +71,13 @@ Pour cet exemple, nous allons requêter le rapport comparatif de [Bradley Barcol
 
 
     curl -o barcola_report.png -X GET http://localhost:8000/status/$barcola
+
+
 - CLI : 
 
 
     python3 ./src/main.py $barcola
+
 
 #### Objet
 Le comportement de l'application est le suivant : 
@@ -175,7 +183,7 @@ Pour plus d'informations sur les façons dont vous pouvez contribuer à ce proje
 sur GitHub, en ouvrant une **[New Issue](https://github.com/giovannimin/TellMeMoreAbout/issues/new)** ou en laissant un message via la **[Discussion](https://github.com/giovannimin/TellMeMoreAbout/discussions/1)**.
 
 
-Si vous avez besoin de plus d'information sur les contributions open-source,
+Si vous avez besoin de plus d'informations sur les contributions open-source,
 **[ce guide](https://opensource.guide/how-to-contribute/)** explique pourquoi et comment vous impliquer.
 
 
