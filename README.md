@@ -29,36 +29,36 @@ Pour les contributions, n'hésitez pas à regarder les besoins dans les
 Pour utiliser ce projet en local :
 - Cloner ce repositories avec la commande
 
-
+```markdown
     git clone https://github.com/giovannimin/TellMeMoreAbout.git
-
+```
 
 ### Pré-requis
-Pour installer les dépendances de ce projet
+Pour installer les dépendances de ce projet :
 
-
+```markdown
     pip install requirements.txt
-
+```
 
 ### Utilisation
 Ce projet est destiné à être utilisé via différents modes :
 - Une [API](./src/api/app.py) mise a disposition 
 
-
+```markdown
     curl -o path/${player_name}_report.png -X GET http://localhost:8000/status/${player_name}
-
+```
 
 - Une utilisation locale via la CLI 
-    
 
+```markdown
     python3 ./src/main.py $player_name
-
+```
 
 - Une application executable avec Docker 
 
-
+```markdown
     docker-compose -f TellMeMoreAbout/docker_app/docker-compose.yml up --build
-
+```
 
 - Une utilisation automatisée contrôlée par des bots [X | Twitter](https://twitter.com)
 
@@ -69,19 +69,19 @@ Pour cet exemple, nous allons requêter le rapport comparatif de [Bradley Barcol
 
 - API :
 
-
+```markdown
     curl -o barcola_report.png -X GET http://localhost:8000/status/$barcola
-
+```
 
 - CLI : 
 
-
+```markdown
     python3 ./src/main.py $barcola
-
+```
 
 #### Objet
 Le comportement de l'application est le suivant : 
-```bash
+```markdown
 UserWarning: Exact match for barcola not found.
     Setting `player_name` to first search result: Bradley Barcola  Maybe `player_name` could be one of them ['Malcolm Barcola']
 warnings.warn(msg)
@@ -91,7 +91,7 @@ Dans ce cas, la recherche sélectionne le plus probable, ici Bradley Barcola,
 en précisant avoir aussi trouvé d'autres correspondances ['Malcolm Barcola']. 
 
 L'objet crée est unique et identifié par nom complet, slug_id et id.
-```bash
+```markdown
 <player: Bradley Barcola, slug_id: a0d55a09, id: 140602241202592>
 ```
 
@@ -162,7 +162,11 @@ cette action exécute l'ensemble des tests unitaires pytests lors de chaque push
 
 ### Tests unitaires
 Les tests unitaires sont exécutés automatiquement lors de chaque push sur la branche principale et les logs ajoutés dans le volume monté sur le conteneur. 
-Pour les exécuter manuellement : `python3 -m pytest tests/`
+Pour les exécuter manuellement :
+
+```markdown
+python3 -m pytest tests/
+```
 
 N'hésitez pas à ajouter progressivement les tests unitaires des nouvelles fonctionnalités que vous ajoutez. 
 
