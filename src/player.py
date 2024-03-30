@@ -39,6 +39,7 @@ class Player:
         self.infos = get_player_info(url_page=self._url_page)
         self.img = self.infos['img']
         self.country_img = self.infos['country_img']
+        self.club_img = self.infos['club_img']
         self.position = self.infos['position']
         self.height = self.infos['height']
         self.weight = self.infos['weight']
@@ -49,8 +50,11 @@ class Player:
         self.complete_name = self.infos['complete_name']
         minutes_played_value = get_minutes_played(scouting_url=self._scouting_url)
         self.minutes_played = minutes_played_value if minutes_played_value is not None else None
+
         save_img(get_image(img_url=self.img), output_path=os.path.join(root, 'assets', 'player_attr',  'player_img'))
         save_img(get_image(img_url=self.country_img), output_path=os.path.join(root, 'assets', 'player_attr', 'country_img'))
+        if self.club_img:
+            save_img(get_image(img_url=self.club_img), output_path=os.path.join(root, 'assets', 'player_attr', 'club_img'))
 
     def __repr__(self):
         return "<player: {}, slug_id: {}, id: {}>".format(self.name, self.slug_id, id(self))
