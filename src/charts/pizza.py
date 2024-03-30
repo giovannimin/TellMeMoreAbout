@@ -103,11 +103,22 @@ class Pizza:
 
         player_img = os.path.join(root, 'assets', 'player_attr', 'player_img.png')
         country_img = os.path.join(root, 'assets', 'player_attr', 'country_img.png')
-        fig.figimage(self._resize_img(image=Image.open(player_img)), xo=20, yo=20, zorder=-10, alpha=1)
-        fig.figimage(self._resize_img(image=Image.open(country_img), desired_width=40), xo=130, yo=20, zorder=-10,
+
+        fig.figimage(self._resize_img(image=Image.open(player_img), desired_width=600), xo=20, yo=20, zorder=-10,
                      alpha=1)
+        fig.figimage(self._resize_img(image=Image.open(country_img), desired_width=200), xo=650, yo=20, zorder=-10,
+                     alpha=1)
+
+        if self.player.club_img:
+            club_img = os.path.join(root, 'assets', 'player_attr', 'club_img.png')
+            fig.figimage(self._resize_img(image=Image.open(club_img), desired_width=200), xo=650, yo=220, zorder=-10,
+                         alpha=1)
 
         if save_fig:
             plt.savefig('outputs/fig.png', dpi=500, bbox_inches='tight')
+
         plt.show()
         return fig
+
+
+
