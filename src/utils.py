@@ -140,6 +140,7 @@ def get_player_info(url_page: str) -> dict:
         player_info['country_img'] = re.search(r"url\('(.+?)'\)",
                                                div_tag.find('span', class_='f-i').get('style')).group(1)
         player_info['img'] = div_tag.find("img", class_="").get('src')
+        player_info['club_img'] = None  # TO DO
         player_info['club'] = div_tag.find('strong', text='Club:').find_next('a').text.strip()
         player_info['age'] = calculate_age(div_tag.find('span', {'id': 'necro-birth'}).get('data-birth'))
 
@@ -180,6 +181,10 @@ def get_player_info(url_page: str) -> dict:
         pass
 
     return player_info
+
+
+def get_club_img():
+    return
 
 
 def get_image(img_url: str):
