@@ -84,20 +84,20 @@ class Pizza:
 
         fig.text(
             0.515, 0.97, f"{self.player.complete_name} - {self.player.club}", size=18,
-            ha="center", color="#000000"
+            ha="center", color="#130f40"
         )
 
         fig.text(
             0.515, 0.942, f"Per 90 Percentile Rank | 365 last days | {self.player.minutes_played} "
                           f"minutes played", size=15,
-            ha="center", color="#000000"
+            ha="center", color="#130f40"
         )
 
         fig.text(
             0.99, 0.005, f"Players only with more than 15 90s\ndata: Opta from FBref\n"
                          f"Player compared to positional peers in Men's Big 5 Leagues, "
                          f"UCL, UEL over the last 365 days.", size=8,
-            color="#000000",
+            color="#130f40",
             ha="right"
         )
 
